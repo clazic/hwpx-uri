@@ -48,7 +48,7 @@ src\build.bat     # Windows 에서 실행 (더블클릭 또는 cmd)
 배포폴더/
 ├── hwpxgen(-mac-arm64 | -mac-intel | -win-x64.exe)   ← 자기 OS용 1개
 └── references/
-    ├── 양식_통합.hwpx      ← 기본 템플릿
+    ├── form-template.hwpx  ← 기본 템플릿 (구 양식_통합)
     └── form-rules.json
 ```
 
@@ -197,14 +197,14 @@ hwpx-uri/
 
 | 파일 | 역할 |
 |---|---|
-| `양식_통합.hwpx` | **기본 템플릿** — 빈 양식에 완성본의 추가 정의(paraPr 92/93·charPr 94)와 그림·절 앵커를 이식한 통합본. placeholder 기반이라 미지정 메타는 검증이 잡아냄 |
+| `form-template.hwpx` | **기본 템플릿**(구 양식_통합) — 빈 양식에 완성본의 추가 정의(paraPr 92/93·charPr 94)와 그림·절 앵커를 이식한 통합본. placeholder 기반이라 미지정 메타는 검증이 잡아냄. 파일명은 크로스플랫폼 안정성을 위해 ASCII |
 | `보고서-양식.hwpx` | 원본 빈 양식(이식 전) — 양식 개정 대조용 보관 |
 | `완성본_샘플.hwpx` | 실제 발간 보고서 — 스타일 실측·검증 참조용 보관 |
 | `form-rules.json` | 구조 규칙(스타일 ID·기호·번호·쪽나눔) |
 | `양식_심층분석보고서.md` | 양식 XML 실측 분석 문서 |
 
 양식이 개정되면 **코드 수정 없이** 두 파일만 교체한다:
-1. `references/양식_통합.hwpx`를 새 버전으로 (필요시 추가 정의 재이식)
+1. `references/form-template.hwpx`를 새 버전으로 (필요시 추가 정의 재이식)
 2. `references/form-rules.json`의 스타일 ID·paraPr·기호·번호 규칙을 새 양식 실측값으로 갱신
 
 서식(폰트·색·들여쓰기)은 양식이 소유하므로 조립기가 정의하지 않는다. form-rules.json은 구조 규칙(기호·번호·쪽나눔)만 담는다.

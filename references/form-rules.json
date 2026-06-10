@@ -1,6 +1,6 @@
 {
-  "_comment": "울산연구원 기본정책과제 보고서 변환 규칙. 완성본(기본과제.hwpx) 실측 + 작성가이드 종합. 양식 개정 시 이 파일과 template 만 교체하면 조립기 코드 수정 불필요. 기본 템플릿 양식_통합.hwpx = 빈 양식(보고서-양식.hwpx)에 완성본의 paraPr92/93·charPr94·그림/절 앵커를 이식한 통합본(placeholder 기반).",
-  "template": "양식_통합.hwpx",
+  "_comment": "울산연구원 기본정책과제 보고서 변환 규칙. 완성본(기본과제.hwpx) 실측 + 작성가이드 종합. 양식 개정 시 이 파일과 template 만 교체하면 조립기 코드 수정 불필요. 기본 템플릿 form-template.hwpx(=양식_통합) = 빈 양식(보고서-양식.hwpx)에 완성본의 paraPr92/93·charPr94·그림/절 앵커를 이식한 통합본(placeholder 기반). 파일명은 크로스플랫폼·zip·URL 안정성을 위해 ASCII.",
+  "template": "form-template.hwpx",
 
   "levels": {
     "chapter": {

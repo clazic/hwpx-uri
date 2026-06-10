@@ -1,5 +1,5 @@
 @echo off
-REM 크로스 컴파일 — Windows에서 실행. macOS+Windows 바이너리 생성 (산출물은 스킬 루트의 ..\bin\)
+REM 크로스 컴파일 — Windows에서 실행. mac/linux/win 바이너리 생성 (산출물은 스킬 루트의 ..\bin\)
 cd /d "%~dp0"
 if not exist ..\bin mkdir ..\bin
 set CGO_ENABLED=0
@@ -12,5 +12,11 @@ go build -o ..\bin\hwpxgen-mac-arm64 .
 set GOOS=darwin
 set GOARCH=amd64
 go build -o ..\bin\hwpxgen-mac-intel .
+set GOOS=linux
+set GOARCH=amd64
+go build -o ..\bin\hwpxgen-linux-x64 .
+set GOOS=linux
+set GOARCH=arm64
+go build -o ..\bin\hwpxgen-linux-arm64 .
 echo 완료: ..\bin\
 dir ..\bin
