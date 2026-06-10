@@ -1,0 +1,13 @@
+# OMC 세션·메모리 상태 (커밋 금지)
+.omc/
+
+# macOS
+.DS_Store
+
+# 환경변수
+.env
+*.env
+
+# 빌드 임시
+*.out
+.tmp/

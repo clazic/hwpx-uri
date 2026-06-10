@@ -1,0 +1,110 @@
+{
+  "_comment": "울산연구원 기본정책과제 보고서 변환 규칙. 완성본(기본과제.hwpx) 실측 + 작성가이드 종합. 양식 개정 시 이 파일과 template 만 교체하면 조립기 코드 수정 불필요. 기본 템플릿 양식_통합.hwpx = 빈 양식(보고서-양식.hwpx)에 완성본의 paraPr92/93·charPr94·그림/절 앵커를 이식한 통합본(placeholder 기반).",
+  "template": "양식_통합.hwpx",
+
+  "levels": {
+    "chapter": {
+      "_role": "장 (Ⅰ Ⅱ …). 간지 + 미니목차표 + 장제목 세 단락으로 전개",
+      "cover":  { "style": "20", "para": "13" },
+      "toc":    { "style": "0",  "para": "90" },
+      "title":  { "style": "4",  "para": "17", "pageBreak": true },
+      "number": "roman_dot"
+    },
+    "section": {
+      "_role": "소절 (1.). 첫 절(paraFirst 20)은 간지 직후라 쪽나눔 없음. 둘째 이후 절(paraRest 92)은 paraPr 92 의 pageBreakBefore=1 로 새 쪽에서 시작(완성본 실측). pageBreak=false 는 조립기가 별도 쪽나눔을 추가하지 않는다는 뜻",
+      "style": "5",
+      "paraFirst": "20",
+      "paraRest": "92",
+      "pageBreak": false,
+      "number": "arabic_dot"
+    },
+    "subsec": {
+      "_role": "세부항목 (1)). subsec/detail 은 같은 style·para, 번호 형식만 다름",
+      "style": "6", "para": "3",
+      "number": "arabic_paren"
+    },
+    "detail": {
+      "_role": "상세항목 ((1))",
+      "style": "6", "para": "3",
+      "number": "paren_arabic"
+    },
+    "point": {
+      "_role": "주요 항목 ○ (불릿 1단계)",
+      "style": "8", "para": "4",
+      "symbol": "○ "
+    },
+    "sub": {
+      "_role": "세부 설명 – en dash (불릿 2단계). 완성본 기준 para 93",
+      "style": "8", "para": "93",
+      "symbol": "– "
+    },
+    "note": {
+      "_role": "비고 ※ (양식 보조. 작성가이드엔 없으나 양식에 존재)",
+      "style": "26", "para": "33",
+      "symbol": "※ "
+    }
+  },
+
+  "table": {
+    "_role": "데이터표: 캡션(위) + 표 + 자료(아래)",
+    "caption":   { "style": "0", "para": "69" },
+    "grid":      { "style": "8", "para": "37" },
+    "headerBorderFill": "9",
+    "dataBorderFill": "3",
+    "width": 35417,
+    "headerHeight": 2200,
+    "bodyHeight": 1600,
+    "captionFmt": "[표 %d-%d]  "
+  },
+
+  "figure": {
+    "_role": "그림: 이미지영역 + 캡션(아래·가운데). para 1 = CENTER",
+    "area":    { "style": "8", "para": "1" },
+    "caption": { "style": "0", "para": "1" },
+    "captionFmt": "[그림 %d-%d]  "
+  },
+
+  "source": {
+    "_role": "자료 출처 (표/그림 아래)",
+    "style": "8", "para": "4",
+    "prefix": "자료: "
+  },
+
+  "footnote": {
+    "_role": "본문 [^N] 마커 → HWPX footNote 컨트롤. 완성본 실측값",
+    "contentCharPr": "94",
+    "contentPara": "4",
+    "contentStyle": "8",
+    "markerSuffix": "41",
+    "numSuffix": ")"
+  },
+
+  "references": {
+    "_role": "참고문헌: 제목 + • 항목들",
+    "title": { "style": "4", "para": "17" },
+    "item":  { "style": "8", "para": "4", "symbol": "• " }
+  },
+
+  "appendix": {
+    "_role": "부록: 제목 + 절/항목(본문과 동일 전개)",
+    "title": { "style": "4", "para": "17" }
+  },
+
+  "layout": {
+    "_role": "편집 규칙. pageNumRestartPerChapter=false 면 2장 이후 간지의 newNum(PAGE) 을 제거해 본문 쪽번호가 1장부터 연속(앞부속은 masterpage0/1 이라 번호 없음). true 면 완성본 원본처럼 장마다 1부터 리셋",
+    "chapterPageBreak": true,
+    "sectionPageBreak": false,
+    "blankBetweenSubsec": true,
+    "blankBetweenDetail": true,
+    "blankParaStyle": "8",
+    "blankParaPara": "4",
+    "pageNumRestartPerChapter": false
+  },
+
+  "numbering": {
+    "roman_dot":    { "desc": "Ⅰ. Ⅱ. (로마자+점)", "roman": true,  "suffix": ". " },
+    "arabic_dot":   { "desc": "1. 2. (아라비아+점)", "roman": false, "suffix": ". " },
+    "arabic_paren": { "desc": "1) 2) (아라비아+괄호)", "roman": false, "suffix": ") " },
+    "paren_arabic": { "desc": "(1) (2) (괄호로 감쌈)", "roman": false, "prefix": "(", "suffix": ") " }
+  }
+}

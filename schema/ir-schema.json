@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "울산연구원 기본정책과제 보고서 IR",
+  "description": "hwpxgen 의 입력 중간표현(Report). 조립기는 이 구조만 보고 HWPX 를 만든다.",
+  "type": "object",
+  "required": ["meta", "body"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "description": "표지·발간 메타데이터",
+      "properties": {
+        "title":    { "type": "string", "description": "보고서 제목" },
+        "series":   { "type": "string", "description": "시리즈 (예: 기본정책과제 2026-01)" },
+        "lab":      { "type": "string", "description": "연구실명" },
+        "author":   { "type": "string", "description": "연구자명" },
+        "pub_date": { "type": "string", "description": "발간년월 (예: 2026년 12월)" },
+        "director": { "type": "string", "description": "울산연구원장명" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "description": "요약 4블록",
+      "properties": {
+        "purpose":     { "type": "string", "description": "연구목적 및 필요성" },
+        "contents":    { "type": "string", "description": "연구 주요 내용" },
+        "conclusion":  { "type": "string", "description": "결론 및 정책제언" },
+        "utilization": { "type": "string", "description": "정책 활용실적 및 계획" }
+      }
+    },
+    "foreword": { "type": "string", "description": "발간사 본문(선택)" },
+    "body": {
+      "type": "array",
+      "description": "장(chapter) 리스트. 최상위는 반드시 chapter.",
+      "items": { "$ref": "#/definitions/node" }
+    },
+    "references": {
+      "type": "array",
+      "description": "참고문헌 항목들(기호 없이 내용만; • 는 조립기가 부여)",
+      "items": { "type": "string" }
+    },
+    "appendix": {
+      "type": "array",
+      "description": "부록 (절/항목 트리)",
+      "items": { "$ref": "#/definitions/node" }
+    },
+    "footnotes": {
+      "type": "object",
+      "description": "각주 정의. 본문 text 의 [^N] 마커와 연결.",
+      "additionalProperties": { "type": "string" }
+    }
+  },
+  "definitions": {
+    "node": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["chapter", "section", "subsec", "detail", "point", "sub", "note", "table", "figure", "para"],
+          "description": "chapter=장, section=절, subsec=세부(1)), detail=상세((1)), point=○, sub=–, note=※, table=표, figure=그림, para=일반문단"
+        },
+        "text": {
+          "type": "string",
+          "description": "내용(기호·번호 제외). 번호는 조립기가 카운터로 자동 부여. 각주는 [^N] 마커 사용."
+        },
+        "children": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/node" }
+        },
+        "payload": {
+          "type": "object",
+          "description": "table/figure 노드의 부가 데이터",
+          "properties": {
+            "table": {
+              "type": "object",
+              "properties": {
+                "title":   { "type": "string", "description": "표 제목([표 N-M] 번호는 자동)" },
+                "headers": { "type": "array", "items": { "type": "string" } },
+                "rows":    { "type": "array", "items": { "type": "array", "items": { "type": "string" } } },
+                "source":  { "type": "string", "description": "자료 출처" }
+              }
+            },
+            "figure": {
+              "type": "object",
+              "description": "image_path / chart / flow 중 하나를 채운다",
+              "properties": {
+                "caption":    { "type": "string", "description": "그림 제목([그림 N-M] 번호는 자동)" },
+                "image_path": { "type": "string", "description": "외부 이미지 파일 경로" },
+                "chart": {
+                  "type": "object",
+                  "description": "그룹 막대그래프",
+                  "properties": {
+                    "title":  { "type": "string" },
+                    "labels": { "type": "array", "items": { "type": "string" }, "description": "x축 그룹 라벨" },
+                    "series": {
+                      "type": "object",
+                      "description": "계열명 → 값 배열(labels 와 대응)",
+                      "additionalProperties": { "type": "array", "items": { "type": "integer" } }
+                    }
+                  }
+                },
+                "flow": {
+                  "type": "object",
+                  "description": "세로 흐름 순서도",
+                  "properties": {
+                    "title":        { "type": "string" },
+                    "parallel_top": { "type": "array", "items": { "type": "string" }, "description": "상단 병렬 박스(합류)" },
+                    "steps":        { "type": "array", "items": { "type": "string" }, "description": "세로 단계 박스" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
